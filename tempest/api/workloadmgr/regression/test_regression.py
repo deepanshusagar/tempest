@@ -92,7 +92,7 @@ class WorkloadsTest(base.BaseWorkloadmgrTest):
     	        reporting.add_test_step("Snapshot one-click restore verification with DB", tvaultconf.FAIL)
                 raise Exception ("Snapshot Restore did not get created")
         
-            self.restore_id = query_data.get_snapshot_restore_id(self.snapshot_id)
+            self.restore_id = query_data.get_snapshot_restore_id(self.snapshot_ids[1])
             LOG.debug("Restore ID: " + str(self.restore_id))
 
 	    #Fetch instance details after restore
@@ -158,6 +158,7 @@ class WorkloadsTest(base.BaseWorkloadmgrTest):
 		reporting.add_test_step(str(self.exception), tvaultconf.FAIL)
 		raise Exception (str(self.exception))
 	    LOG.debug("pre req completed")
+	    reporting.test_case_to_write()
         except Exception as e:
             LOG.error("Exception: " + str(e))
             reporting.set_test_script_status(tvaultconf.FAIL)
